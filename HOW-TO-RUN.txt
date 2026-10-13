@@ -1,0 +1,44 @@
+HOW TO RUN THIS WEBSITE — SIMPLE VERSION
+==========================================
+
+You only need to do ONE thing yourself: install Node.js (one time only).
+After that, you just double-click files. No typing commands.
+
+STEP 1 — Install Node.js (one time only)
+-----------------------------------------
+Go to: https://nodejs.org
+Download the version that says "LTS" and install it like any normal program
+(keep clicking Next).
+
+STEP 2 — First-time setup (one time only)
+-----------------------------------------
+Windows:  double-click  "First-Time-Setup.bat"
+Mac:      double-click  "First-Time-Setup.command"
+
+A black window will open. It will:
+ 1. Install everything the website needs (takes a few minutes).
+ 2. Ask you to create the Principal/Admin account — type in:
+      - Full name (e.g. Sir Hader)
+      - A username you choose (e.g. hader)
+      - A temporary password (at least 6 characters)
+
+When it says "Setup complete!", you're done with this step forever.
+
+STEP 3 — Start the website (every time you want to use it)
+-------------------------------------------------------------
+Windows:  double-click  "Start-Website.bat"
+Mac:      double-click  "Start-Website.command"
+
+Your browser will open automatically to the website.
+ - Public website:        the page that opens
+ - Staff/Student login:   click "Staff / Student Login" at the top,
+                           or go to  http://localhost:3000/login.html
+
+To stop the website: just close the black window.
+
+NOTE (Mac only): the first time you double-click a .command file, macOS may
+warn "cannot verify developer." Right-click the file, choose "Open," then
+click "Open" again in the popup. You only need to do this once.
+
+If anything shows an error message, copy the exact text and send it back
+and it can be fixed.

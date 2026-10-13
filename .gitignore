@@ -1,0 +1,13 @@
+node_modules/
+db/school.db
+db/school.db-journal
+db/school.db-wal
+db/school.db-shm
+public/uploads/*
+!public/uploads/.gitkeep
+.env
+db/content.db
+db/content.db-wal
+db/content.db-shm
+public/uploads/content/*
+!public/uploads/content/.gitkeep
