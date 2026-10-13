@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admissions — The Learning Minds Higher Secondary School</title>
+<meta name="description" content="Apply online to The Learning Minds Higher Secondary School.">
+<meta name="theme-color" content="#5b21b6">
+<link rel="icon" href="/assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="admission">
+
+<header>
+  <div class="nav">
+    <a href="/" class="brand">
+      <img src="/assets/logo.png" alt="The Learning Minds Higher Secondary School logo">
+      <span class="brand-text">The Learning Minds<small>Higher Secondary School</small></span>
+    </a>
+    <button class="navToggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+    <ul class="links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/principal.html">Principal</a></li>
+      <li><a href="/teachers.html">Teachers</a></li>
+      <li><a href="/academics.html">Academics</a></li>
+      <li><a href="/gallery.html">Gallery</a></li>
+      <li><a href="/admission.html" class="active">Admissions</a></li>
+      <li><a href="/announcement.html">Announcements</a></li>
+      <li><a href="/connect.html">Contact</a></li>
+      <li><a href="/login.html" class="login-link">Portal Login</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="page-hero" style="padding:64px 0 56px;">
+  <div class="wrap">
+    <div class="crumbs"><a href="/">Home</a> &nbsp;/&nbsp; Admissions</div>
+    <h1>Online admission form</h1>
+    <p>Fill in the form below to apply. You will receive a unique application ID once it is submitted, and your application status will start as <strong>Pending</strong>.</p>
+  </div>
+</section>
+<main class="page-body">
+  <div class="wrap" style="max-width:900px;">
+      <form id="admissionForm" class="form-card" enctype="multipart/form-data" novalidate>
+        <div class="form-grid">
+          <div class="field"><label for="student_name">Student full name <span class="req">*</span></label><input type="text" id="student_name" name="student_name" required></div>
+          <div class="field"><label for="dob">Date of birth <span class="req">*</span></label><input type="date" id="dob" name="dob" required></div>
+          <div class="field"><label for="gender">Gender <span class="req">*</span></label>
+            <select id="gender" name="gender" required><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+          <div class="field"><label for="previous_school">Previous school</label><input type="text" id="previous_school" name="previous_school"></div>
+          <div class="field"><label for="class_applied_for">Class applying for <span class="req">*</span></label><input type="text" id="class_applied_for" name="class_applied_for" placeholder="e.g. 9th" required></div>
+          <div class="field"><label for="guardian_name">Guardian name <span class="req">*</span></label><input type="text" id="guardian_name" name="guardian_name" required></div>
+          <div class="field"><label for="guardian_relationship">Guardian relationship <span class="req">*</span></label><input type="text" id="guardian_relationship" name="guardian_relationship" placeholder="e.g. Father" required></div>
+          <div class="field"><label for="guardian_contact">Guardian contact number <span class="req">*</span></label><input type="tel" id="guardian_contact" name="guardian_contact" required></div>
+          <div class="field"><label for="guardian_email">Guardian email (optional)</label><input type="email" id="guardian_email" name="guardian_email"></div>
+          <div class="field full"><label for="home_address">Home address <span class="req">*</span></label><input type="text" id="home_address" name="home_address" required></div>
+          <div class="field full"><label for="additional_info">Additional information</label><textarea id="additional_info" name="additional_info"></textarea></div>
+          <div class="field"><label for="photo">Student photo (optional)</label><input type="file" id="photo" name="photo" accept=".jpg,.jpeg,.png"><small>JPG or PNG, up to 5MB.</small></div>
+          <div class="field"><label for="document">Supporting document (optional)</label><input type="file" id="document" name="document" accept=".jpg,.jpeg,.png,.pdf"><small>PDF, JPG or PNG, up to 5MB.</small></div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submitBtn">Submit application</button>
+          <span id="formLoading" style="display:none;color:var(--slate);font-size:.9rem;">Submitting…</span>
+        </div>
+        <div class="form-msg" id="formMsg" role="status"></div>
+      </form>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <div class="fbrand"><img src="/assets/logo.png" alt="School logo"><span>The Learning Minds</span></div>
+        <p>The Learning Minds Higher Secondary School, Gahkuch, Ghizer, Gilgit-Baltistan. Igniting young minds.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/about.html">About</a></li><li><a href="/principal.html">Principal's message</a></li>
+          <li><a href="/teachers.html">Teachers</a></li><li><a href="/academics.html">Academics</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="/admission.html">Apply for admission</a></li><li><a href="/announcement.html">Announcements</a></li>
+          <li><a href="/gallery.html">Gallery</a></li><li><a href="/connect.html">Contact &amp; location</a></li>
+          <li><a href="/login.html">Staff / Student login</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom"><span>© 2026 The Learning Minds Higher Secondary School</span><span>Near DHO Office, Gahkuch, Ghizer</span></div>
+  </div>
+</footer>
+
+<script src="/js/notify.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

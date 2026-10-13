@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login — The Learning Minds Higher Secondary School</title>
+<link rel="icon" href="/assets/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+  .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(135deg,var(--primary-dark),var(--primary) 60%,var(--primary-2));}
+  .login-card{max-width:400px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:36px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);animation:pageIn .5s ease both;}
+  .login-card .brand{justify-content:center;margin-bottom:20px;}
+  .login-card h1{font-size:1.3rem;text-align:center;margin-bottom:6px;}
+  .login-card p.sub{text-align:center;color:var(--slate);font-size:.88rem;margin-bottom:24px;}
+  .field{margin-bottom:16px;}
+  .field input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:.95rem;}
+  .field label{display:block;font-size:.85rem;font-weight:600;margin-bottom:6px;}
+</style>
+</head>
+<body class="dash">
+<div class="login-wrap">
+  <div class="login-card">
+    <a href="/" class="brand"><img src="/assets/logo.png" alt="School logo"><span class="brand-text">The Learning Minds</span></a>
+    <h1>Sign in</h1>
+    <p class="sub">Principal/Admin, Teacher, and Student portal</p>
+    <form id="loginForm">
+      <div class="field"><label for="username">Username</label><input type="text" id="username" required autocomplete="username"></div>
+      <div class="field"><label for="password">Password</label><input type="password" id="password" required autocomplete="current-password"></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Sign in</button>
+      <div class="form-msg" id="loginMsg"></div>
+    </form>
+  </div>
+</div>
+<script src="/js/notify.js"></script>
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const msg = document.getElementById('loginMsg');
+  msg.className = 'form-msg';
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: document.getElementById('username').value.trim(),
+        password: document.getElementById('password').value
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) { msg.className = 'form-msg show error'; msg.textContent = data.error || 'Login failed.'; return; }
+    TLM.success('Signing you in…', 'Welcome back');
+    await new Promise(r => setTimeout(r, 800));
+    if (data.mustChangePassword) { location.href = '/change-password.html'; return; }
+    if (data.role === 'admin') location.href = '/admin.html';
+    else if (data.role === 'teacher') location.href = '/teacher-dashboard.html';
+    else location.href = '/student-dashboard.html';
+  } catch (err) {
+    msg.className = 'form-msg show error'; msg.textContent = 'Could not reach the server.';
+  }
+});
+</script>
+</body>
+</html>

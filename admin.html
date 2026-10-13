@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Dashboard — The Learning Minds Higher Secondary School</title>
+<link rel="icon" href="/assets/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="dash">
+<div class="admin-shell">
+  <div class="admin-topbar">
+    <a href="/" class="brand"><img src="/assets/logo.png" alt="School logo"><span class="brand-text">The Learning Minds<small>Principal / Admin Dashboard</small></span></a>
+    <div class="keybox">
+      <span id="sessionName" style="color:var(--slate);font-size:.9rem;"></span>
+      <button class="sound-btn" id="soundBtn" type="button" title="Toggle notification sound" aria-label="Toggle notification sound">🔔</button>
+      <button class="btn btn-ghost" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="accounts">Accounts</button>
+    <button class="tab" data-tab="admissions">Admissions</button>
+    <button class="tab" data-tab="announcements">Announcements</button>
+    <button class="tab" data-tab="classes">Classes</button>
+    <button class="tab" data-tab="principal">Principal</button>
+    <button class="tab" data-tab="teachers">Teachers</button>
+    <button class="tab" data-tab="gallery">Gallery</button>
+  </div>
+
+  <!-- ACCOUNTS TAB -->
+  <div id="tab-accounts">
+    <div class="panel">
+      <h3 style="font-size:1rem;margin-bottom:14px;">Create account</h3>
+      <form id="accForm">
+        <div class="form-grid">
+          <div class="field"><label>Full name</label><input type="text" id="accFullName" required></div>
+          <div class="field"><label>Username</label><input type="text" id="accUsername" required></div>
+          <div class="field"><label>Temporary password</label><input type="text" id="accPassword" minlength="6" required></div>
+          <div class="field">
+            <label>Role</label>
+            <select id="accRole" required>
+              <option value="">Select</option>
+              <option value="teacher">Teacher</option>
+              <option value="student">Student</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="field" id="accSubjectWrap" style="display:none;"><label>Subject</label><input type="text" id="accSubject" placeholder="e.g. Mathematics"></div>
+          <div class="field" id="accClassWrap" style="display:none;"><label>Class</label><input type="text" id="accClass" placeholder="e.g. 9th A"></div>
+          <div class="field" id="accRollWrap" style="display:none;"><label>Roll number (optional)</label><input type="text" id="accRoll"></div>
+          <div class="field" id="accGuardianNameWrap" style="display:none;"><label>Guardian name (optional)</label><input type="text" id="accGuardianName"></div>
+          <div class="field" id="accGuardianContactWrap" style="display:none;"><label>Guardian contact (optional)</label><input type="text" id="accGuardianContact"></div>
+          <div class="field">
+            <label>Account status</label>
+            <select id="accStatus"><option value="1">Active</option><option value="0">Inactive</option></select>
+          </div>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Create account</button></div>
+        <div class="form-msg" id="accMsg"></div>
+      </form>
+    </div>
+
+    <div class="panel">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+        <input type="text" id="accSearch" placeholder="Search by name or username..." style="flex:1;min-width:200px;padding:9px 10px;border:1px solid var(--line);border-radius:6px;">
+        <select id="accRoleFilter" style="padding:9px 10px;border:1px solid var(--line);border-radius:6px;">
+          <option value="">All roles</option><option value="admin">Admin</option><option value="teacher">Teacher</option><option value="student">Student</option>
+        </select>
+        <button class="btn btn-ghost" id="accRefresh">Refresh</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Name</th><th>Username</th><th>Role</th><th>Subject/Class</th><th>Status</th><th>Must change pw</th><th>Actions</th></tr></thead>
+          <tbody id="accBody"><tr><td colspan="7">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMISSIONS TAB -->
+  <div id="tab-admissions" style="display:none;">
+    <div class="panel">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
+        <input type="text" id="admSearch" placeholder="Search by name, ID, guardian..." style="flex:1;min-width:200px;padding:9px 10px;border:1px solid var(--line);border-radius:6px;">
+        <select id="admStatusFilter" style="padding:9px 10px;border:1px solid var(--line);border-radius:6px;">
+          <option value="">All statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option>
+        </select>
+        <button class="btn btn-ghost" id="admRefresh">Refresh</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>App ID</th><th>Student</th><th>Class</th><th>Guardian</th><th>Contact</th><th>Status</th><th>Submitted</th><th>Actions</th></tr></thead>
+          <tbody id="admBody"><tr><td colspan="8">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANNOUNCEMENTS TAB -->
+  <div id="tab-announcements" style="display:none;">
+    <div class="panel">
+      <h3 style="font-size:1rem;margin-bottom:14px;">New announcement</h3>
+      <form id="annForm">
+        <div class="form-grid">
+          <div class="field full"><label>Title</label><input type="text" id="annTitle" required></div>
+          <div class="field full"><label>Body</label><textarea id="annBody" required></textarea></div>
+          <div class="field"><label>Date</label><input type="date" id="annDate"></div>
+          <div class="field">
+            <label>Audience</label>
+            <select id="annAudience">
+              <option value="all">All</option><option value="teachers">Teachers</option><option value="students">Students</option><option value="class">Specific class</option>
+            </select>
+          </div>
+          <div class="field" id="annClassWrap" style="display:none;"><label>Class name</label><input type="text" id="annClassName" placeholder="e.g. 9th A"></div>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Publish announcement</button></div>
+      </form>
+    </div>
+    <div class="panel">
+      <h3 style="font-size:1rem;margin-bottom:14px;">All announcements</h3>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Title</th><th>Audience</th><th>Date</th><th>Posted by</th><th>Published</th><th>Actions</th></tr></thead>
+          <tbody id="annBody2"><tr><td colspan="6">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLASSES TAB -->
+  <div id="tab-classes" style="display:none;">
+    <div class="panel">
+      <h3 style="font-size:1rem;margin-bottom:14px;">Assign a teacher to a class &amp; subject</h3>
+      <p style="color:var(--slate);font-size:.85rem;margin-top:-8px;margin-bottom:14px;">This is what makes a class show up on a teacher's dashboard, and lets students in that class receive class-specific announcements.</p>
+      <form id="assignForm">
+        <div class="form-grid">
+          <div class="field">
+            <label>Teacher</label>
+            <select id="assignTeacher" required><option value="">Select a teacher</option></select>
+          </div>
+          <div class="field"><label>Class name</label><input type="text" id="assignClassName" placeholder="e.g. 9th A" required></div>
+          <div class="field"><label>Subject</label><input type="text" id="assignSubject" placeholder="e.g. Mathematics" required></div>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Assign</button></div>
+        <div class="form-msg" id="assignMsg"></div>
+      </form>
+    </div>
+    <div class="panel">
+      <h3 style="font-size:1rem;margin-bottom:14px;">Current assignments</h3>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Teacher</th><th>Class</th><th>Subject</th><th>Actions</th></tr></thead>
+          <tbody id="assignBody"><tr><td colspan="4">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCIPAL TAB -->
+  <div id="tab-principal" style="display:none;">
+    <div class="panel">
+      <h3>Principal's message &amp; photo</h3>
+      <p class="hint">Shown on the home page and the Principal page of the public website.</p>
+      <form id="prForm">
+        <div class="form-grid">
+          <div class="field"><label for="prName">Name</label><input type="text" id="prName" maxlength="120" required></div>
+          <div class="field"><label for="prTitle">Title / designation</label><input type="text" id="prTitle" maxlength="160" required></div>
+          <div class="field full"><label for="prMessage">Message</label><textarea id="prMessage" rows="9" maxlength="6000" placeholder="Write the Principal's message here…"></textarea><small id="prCount">0 / 6000</small></div>
+          <div class="field full">
+            <label>Photo</label>
+            <div class="upload-row">
+              <div class="upload-preview" id="prPreview">No photo</div>
+              <div>
+                <input type="file" id="prPhoto" accept=".jpg,.jpeg,.png,.webp,.gif" style="padding:8px;">
+                <small>JPG, PNG, WEBP or GIF, up to 5 MB. A portrait photo works best.</small>
+                <label class="checkline" id="prRemoveWrap" style="display:none;"><input type="checkbox" id="prRemove"> Remove current photo</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary" type="submit" id="prSave">Save principal's message</button></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TEACHERS TAB -->
+  <div id="tab-teachers" style="display:none;">
+    <div class="panel">
+      <h3 id="tpFormTitle">Add a teacher profile</h3>
+      <p class="hint">These profiles are what visitors see on the public Teachers page. (Login accounts are managed separately in the Accounts tab.)</p>
+      <div class="edit-banner" id="tpBanner"></div>
+      <form id="tpForm">
+        <input type="hidden" id="tpId">
+        <div class="form-grid">
+          <div class="field"><label for="tpName">Name</label><input type="text" id="tpName" maxlength="120" required placeholder="e.g. Sir Saddam"></div>
+          <div class="field"><label for="tpDesignation">Designation</label><input type="text" id="tpDesignation" maxlength="160" required placeholder="e.g. Mathematics Teacher"></div>
+          <div class="field full"><label for="tpBio">Bio</label><textarea id="tpBio" rows="4" maxlength="3000" placeholder="Qualifications, experience, a short introduction…"></textarea></div>
+          <div class="field"><label for="tpOrder">Display order (optional)</label><input type="number" id="tpOrder" placeholder="1 shows first"><small>Lower numbers appear first. Leave empty to add at the end.</small></div>
+          <div class="field">
+            <label>Photo</label>
+            <div class="upload-row">
+              <div class="upload-preview" id="tpPreview">No photo</div>
+              <div>
+                <input type="file" id="tpPhoto" accept=".jpg,.jpeg,.png,.webp,.gif" style="padding:8px;">
+                <label class="checkline" id="tpRemoveWrap" style="display:none;"><input type="checkbox" id="tpRemove"> Remove current photo</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit" id="tpSave">Add teacher</button>
+          <button class="btn btn-ghost" type="button" id="tpCancel" style="display:none;">Cancel editing</button>
+        </div>
+      </form>
+    </div>
+    <div class="panel">
+      <h3>Teacher profiles on the website</h3>
+      <div class="admin-cards" id="tpList"><div class="empty-note" style="grid-column:1/-1">Loading…</div></div>
+    </div>
+  </div>
+
+  <!-- GALLERY TAB -->
+  <div id="tab-gallery" style="display:none;">
+    <div class="panel">
+      <h3>Upload gallery photos</h3>
+      <p class="hint">Select one or many photos at once. The caption (optional) is applied to every photo in this upload; you can edit captions individually afterwards.</p>
+      <form id="glForm">
+        <div class="form-grid">
+          <div class="field full"><label for="glFiles">Photos</label><input type="file" id="glFiles" accept=".jpg,.jpeg,.png,.webp,.gif" multiple required style="padding:8px;"><small>JPG, PNG, WEBP or GIF · up to 5 MB each · up to 20 at a time.</small></div>
+          <div class="field full"><label for="glCaption">Caption (optional)</label><input type="text" id="glCaption" maxlength="200" placeholder="e.g. Annual sports day"></div>
+        </div>
+        <div class="admin-cards" id="glPreview" style="margin-top:16px;"></div>
+        <div class="form-actions"><button class="btn btn-primary" type="submit" id="glSave">Upload photos</button></div>
+      </form>
+    </div>
+    <div class="panel">
+      <h3>Photos on the website</h3>
+      <div class="admin-cards" id="glList"><div class="empty-note" style="grid-column:1/-1">Loading…</div></div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/notify.js"></script>
+<script src="/js/auth-guard.js"></script>
+<script src="/js/admin.js"></script>
+<script src="/js/admin-content.js"></script>
+</body>
+</html>

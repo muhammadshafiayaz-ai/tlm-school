@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teacher Dashboard — The Learning Minds Higher Secondary School</title>
+<link rel="icon" href="/assets/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="dash">
+<div class="admin-shell">
+  <div class="admin-topbar">
+    <a href="/" class="brand"><img src="/assets/logo.png" alt="School logo"><span class="brand-text">The Learning Minds<small>Teacher Dashboard</small></span></a>
+    <div class="keybox">
+      <span id="sessionName" style="color:var(--slate);font-size:.9rem;"></span>
+      <button class="btn btn-ghost" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 style="font-size:1rem;margin-bottom:14px;">My profile</h3>
+    <div class="fact-list" id="profileFacts"></div>
+    <div class="field" style="margin-top:16px;">
+      <label for="bio">Short bio (visible on your public profile once published)</label>
+      <textarea id="bio" placeholder="Information coming soon"></textarea>
+    </div>
+    <div class="form-actions"><button class="btn btn-primary" id="saveBio">Save bio</button></div>
+    <div class="form-msg" id="profileMsg"></div>
+  </div>
+
+  <div class="panel">
+    <h3 style="font-size:1rem;margin-bottom:14px;">My classes &amp; students</h3>
+    <div id="classesBlock" class="empty-note">Loading…</div>
+  </div>
+
+  <div class="panel">
+    <h3 style="font-size:1rem;margin-bottom:14px;">Post an announcement</h3>
+    <p style="color:var(--slate);font-size:.85rem;margin-top:-8px;margin-bottom:14px;">You can post to your students, or a specific class you teach. School-wide announcements are posted by the Principal/Admin.</p>
+    <form id="annForm">
+      <div class="form-grid">
+        <div class="field full"><label>Title</label><input type="text" id="annTitle" required></div>
+        <div class="field full"><label>Body</label><textarea id="annBody" required></textarea></div>
+        <div class="field">
+          <label>Audience</label>
+          <select id="annAudience">
+            <option value="students">All my students</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions"><button class="btn btn-primary" type="submit">Post announcement</button></div>
+      <div class="form-msg" id="annMsg"></div>
+    </form>
+  </div>
+
+  <div class="panel">
+    <h3 style="font-size:1rem;margin-bottom:14px;">Announcements</h3>
+    <div class="ann-list" id="annList"></div>
+  </div>
+</div>
+
+<script src="/js/notify.js"></script>
+<script src="/js/auth-guard.js"></script>
+<script src="/js/teacher.js"></script>
+</body>
+</html>
